@@ -1,0 +1,8 @@
+# CodeSignal ICA practice
+
+My solutions to 4-level industry-coding practice problems (honepad, open-gauntlet), written under a 90-minute timer.
+
+| Tool | Problem | Attempt | Notes |
+|---|---|---|---|
+| honepad | bank_system | [2026-10-30_2347](honepad/bank_system/2026-10-30_2347.py) | saved: 2026-10-30 23:47 |
+| open-gauntlet | transaction-processor | [2026-10-31_1423](open-gauntlet/transaction-processor/2026-10-31_1423.py) | started: 2026-10-31 14:23<br>completed levels: [1, 2, 3, 4] (finished)<br>finished at (elapsed): L1 7:37, L2 14:30, L3 30:55, L4 80:29 |
