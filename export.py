@@ -1,19 +1,23 @@
 """Copy my practice solutions out of honepad / open-gauntlet into this repo.
 
 Usage (from anywhere):
-    python E:\\interns\\ICA\\my-solutions\\export.py
+    python E:\\interns\\ICA\\my-solutions\\export.py            # export + commit + push
+    python E:\\interns\\ICA\\my-solutions\\export.py --no-push  # export + commit only
 
 Each attempt is saved as <tool>/<problem>/<date>.py; identical code is skipped,
 so running it repeatedly is safe. README.md is regenerated as an index.
 """
 import hashlib
 import json
+import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
 HONEPAD_WORK = Path.home() / ".honepad" / "work"
 GAUNTLET_RUNS = Path.home() / ".open-gauntlet" / "runs"
+SAVED = []   # relative paths written this run, used for the commit message
 
 
 def digest(text):
@@ -40,7 +44,8 @@ def save(folder, stamp, header, body):
         target = folder / f"{stamp}_{n}.py"
         n += 1
     target.write_text(header + "# ---\n" + body, encoding="utf-8")
-    print(f"saved {target.relative_to(REPO)}")
+    SAVED.append(target.relative_to(REPO).as_posix())
+    print(f"saved {SAVED[-1]}")
     return True
 
 
@@ -98,8 +103,25 @@ def write_index():
     )
 
 
+def git(*args):
+    return subprocess.run(["git", *args], cwd=REPO, check=True)
+
+
+def sync(push):
+    if not SAVED:
+        print("nothing new to commit")
+        return
+    problems = sorted({"/".join(p.split("/")[:2]) for p in SAVED})
+    git("add", "-A")
+    git("commit", "-q", "-m", "Add attempt: " + ", ".join(problems))
+    print("committed:", ", ".join(problems))
+    if push:
+        git("push", "-q")
+        print("pushed to origin")
+
+
 if __name__ == "__main__":
     export_honepad()
     export_gauntlet()
     write_index()
-    print("index: README.md updated")
+    sync(push="--no-push" not in sys.argv)
