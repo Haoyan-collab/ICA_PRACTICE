@@ -5,4 +5,5 @@ My solutions to 4-level industry-coding practice problems (honepad, open-gauntle
 | Tool | Problem | Attempt | Notes |
 |---|---|---|---|
 | honepad | bank_system | [2026-10-30_2347](honepad/bank_system/2026-10-30_2347.py) | saved: 2026-10-30 23:47 |
+| honepad | in_memory_database | [2026-11-01_0126](honepad/in_memory_database/2026-11-01_0126.py) | saved: 2026-11-01 01:26 |
 | open-gauntlet | transaction-processor | [2026-10-31_1423](open-gauntlet/transaction-processor/2026-10-31_1423.py) | started: 2026-10-31 14:23<br>completed levels: [1, 2, 3, 4] (finished)<br>finished at (elapsed): L1 7:37, L2 14:30, L3 30:55, L4 80:29 |
